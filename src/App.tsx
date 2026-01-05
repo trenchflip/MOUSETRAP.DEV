@@ -140,8 +140,10 @@ function findPath(grid: Cell[][]) {
   let cur: [number, number] | null = [size - 1, size - 1];
   while (cur) {
     path.push(cur);
-    const [pr, pc] = prev[cur[0]][cur[1]] || [];
-    if (pr == null || pc == null || (pr === -1 && pc === -1)) break;
+    const prevCell = prev[cur[0]][cur[1]];
+    if (!prevCell) break;
+    const [pr, pc] = prevCell;
+    if (pr === -1 && pc === -1) break;
     cur = [pr, pc];
   }
   return path.reverse();
