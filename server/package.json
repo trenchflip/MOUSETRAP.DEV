@@ -1,0 +1,19 @@
+{
+  "name": "wheel-spin-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js",
+    "keeper:init": "node keeper/init.js",
+    "keeper:run": "KEEPER_LOOP=1 node keeper/index.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "@solana/spl-token": "^0.4.8",
+    "@coral-xyz/anchor": "^0.30.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.22.1",
+    "pg": "^8.12.0"
+  }
+}

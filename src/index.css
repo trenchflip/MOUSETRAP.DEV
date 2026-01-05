@@ -1,0 +1,66 @@
+:root {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 175%;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #f3f9ff;
+  background-color: #081424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --bg: #081424;
+  --bg-soft: #0f2036;
+  --panel: #10253f;
+  --panel-edge: #1f3b63;
+  --accent: #3aa0ff;
+  --accent-strong: #8fd3ff;
+  --ember: #1f6bff;
+  --gold: #b7e1ff;
+  --coin-base: #6ec1ff;
+  --coin-highlight: #d4f0ff;
+  --coin-shadow: #2b73c9;
+  --coin-deep: #1a4f8f;
+  --muted: #cfe7ff;
+  --purple: #2b3b8f;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(1000px 700px at 20% 10%, rgba(58, 160, 255, 0.35), transparent 55%),
+    radial-gradient(800px 600px at 85% 20%, rgba(143, 211, 255, 0.25), transparent 60%),
+    radial-gradient(900px 800px at 50% 100%, rgba(10, 28, 52, 0.6), transparent 60%),
+    linear-gradient(160deg, #07101c 0%, #081424 45%, #0f2036 100%);
+  color: #f3f9ff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+button {
+  font-family: inherit;
+}

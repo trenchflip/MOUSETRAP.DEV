@@ -1,0 +1,352 @@
+[
+  {
+    "signature": "demo-burn-1767595197706",
+    "timestamp": "2026-01-05T06:39:57.706Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.8268",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595185705",
+    "timestamp": "2026-01-05T06:39:45.705Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.6696",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595170138",
+    "timestamp": "2026-01-05T06:39:30.138Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.2287",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595158136",
+    "timestamp": "2026-01-05T06:39:18.136Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.6995",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595146136",
+    "timestamp": "2026-01-05T06:39:06.136Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.2487",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595130532",
+    "timestamp": "2026-01-05T06:38:50.532Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.0549",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595118531",
+    "timestamp": "2026-01-05T06:38:38.531Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.8168",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595106530",
+    "timestamp": "2026-01-05T06:38:26.530Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.3184",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595090944",
+    "timestamp": "2026-01-05T06:38:10.944Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.1757",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595078944",
+    "timestamp": "2026-01-05T06:37:58.944Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.0132",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595066941",
+    "timestamp": "2026-01-05T06:37:46.941Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.7556",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595051354",
+    "timestamp": "2026-01-05T06:37:31.354Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.1270",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595039350",
+    "timestamp": "2026-01-05T06:37:19.350Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.2495",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595023867",
+    "timestamp": "2026-01-05T06:37:03.867Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.1585",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767595011866",
+    "timestamp": "2026-01-05T06:36:51.866Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.7370",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594999864",
+    "timestamp": "2026-01-05T06:36:39.864Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.1977",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594984277",
+    "timestamp": "2026-01-05T06:36:24.277Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.1864",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594972275",
+    "timestamp": "2026-01-05T06:36:12.275Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.3360",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594960275",
+    "timestamp": "2026-01-05T06:36:00.275Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.5221",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594944690",
+    "timestamp": "2026-01-05T06:35:44.690Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.4116",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594932686",
+    "timestamp": "2026-01-05T06:35:32.686Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.6067",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594917104",
+    "timestamp": "2026-01-05T06:35:17.104Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.3630",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594905101",
+    "timestamp": "2026-01-05T06:35:05.101Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.6675",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594893100",
+    "timestamp": "2026-01-05T06:34:53.100Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.9425",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594877513",
+    "timestamp": "2026-01-05T06:34:37.513Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.0629",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594865510",
+    "timestamp": "2026-01-05T06:34:25.510Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.5591",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594853507",
+    "timestamp": "2026-01-05T06:34:13.507Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.0188",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594837920",
+    "timestamp": "2026-01-05T06:33:57.920Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.5852",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594825920",
+    "timestamp": "2026-01-05T06:33:45.920Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.2634",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594810338",
+    "timestamp": "2026-01-05T06:33:30.338Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.3981",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594798334",
+    "timestamp": "2026-01-05T06:33:18.334Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.5880",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594786328",
+    "timestamp": "2026-01-05T06:33:06.328Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.5968",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594770744",
+    "timestamp": "2026-01-05T06:32:50.744Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.6365",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594758742",
+    "timestamp": "2026-01-05T06:32:38.742Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.8418",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594746743",
+    "timestamp": "2026-01-05T06:32:26.743Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.8389",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594731154",
+    "timestamp": "2026-01-05T06:32:11.154Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.7755",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594719154",
+    "timestamp": "2026-01-05T06:31:59.154Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.7868",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594703567",
+    "timestamp": "2026-01-05T06:31:43.567Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.4509",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594691566",
+    "timestamp": "2026-01-05T06:31:31.566Z",
+    "mint": "TBD",
+    "burnAmountUi": "4.3888",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594679566",
+    "timestamp": "2026-01-05T06:31:19.566Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.1569",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594663978",
+    "timestamp": "2026-01-05T06:31:03.978Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.1570",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594651977",
+    "timestamp": "2026-01-05T06:30:51.977Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.7925",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594639973",
+    "timestamp": "2026-01-05T06:30:39.973Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.0406",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594624390",
+    "timestamp": "2026-01-05T06:30:24.390Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.0673",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594612391",
+    "timestamp": "2026-01-05T06:30:12.391Z",
+    "mint": "TBD",
+    "burnAmountUi": "2.1874",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594596808",
+    "timestamp": "2026-01-05T06:29:56.808Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.5588",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594584805",
+    "timestamp": "2026-01-05T06:29:44.805Z",
+    "mint": "TBD",
+    "burnAmountUi": "1.3160",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594572801",
+    "timestamp": "2026-01-05T06:29:32.801Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.0506",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594557212",
+    "timestamp": "2026-01-05T06:29:17.212Z",
+    "mint": "TBD",
+    "burnAmountUi": "3.2744",
+    "dryRun": true
+  },
+  {
+    "signature": "demo-burn-1767594545212",
+    "timestamp": "2026-01-05T06:29:05.212Z",
+    "mint": "TBD",
+    "burnAmountUi": "0.4569",
+    "dryRun": true
+  }
+]

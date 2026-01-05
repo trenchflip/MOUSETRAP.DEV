@@ -1,0 +1,20 @@
+[toolchain]
+anchor_version = "0.32.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.mainnet]
+burnflip_vault = "5mCQoqpbQAZa7KVP2VvjnisTT8yPuv28d3545g1Tiaib"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "mainnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+deploy = "anchor build && anchor deploy"
+test = "anchor test"
