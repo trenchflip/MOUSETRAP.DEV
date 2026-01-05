@@ -142,7 +142,8 @@ function findPath(grid: Cell[][]) {
     path.push(cur);
     const prevCell = prev[cur[0]][cur[1]];
     if (!prevCell) break;
-    const [pr, pc] = prevCell;
+    const pr: number = prevCell[0];
+    const pc: number = prevCell[1];
     if (pr === -1 && pc === -1) break;
     cur = [pr, pc];
   }
