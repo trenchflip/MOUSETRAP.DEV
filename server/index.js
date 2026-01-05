@@ -38,12 +38,6 @@ const PROCESSED_PATH = path.join(BASE_DIR, "processed.json");
 const ROUND_INTERVAL_MS = 5 * 60 * 1000;
 const MIN_PLAYERS = 10;
 const HOUSE_PAYOUT_SHARE = 0.5;
-const DEMO_MODE = process.env.DEMO_MODE === "1";
-const DEMO_ENTRY_MIN = Number(process.env.DEMO_ENTRY_MIN || 0.05);
-const DEMO_ENTRY_MAX = Number(process.env.DEMO_ENTRY_MAX || 0.5);
-const DEMO_ENTRY_INTERVAL_MS = Number(process.env.DEMO_ENTRY_INTERVAL_MS || 8000);
-const DEMO_MIN_PLAYERS = Number(process.env.DEMO_MIN_PLAYERS || MIN_PLAYERS);
-const DEMO_BURN_INTERVAL_MS = Number(process.env.DEMO_BURN_INTERVAL_MS || 12000);
 const BURN_MINT = process.env.BURN_MINT || "";
 const BURN_ADDRESS = process.env.BURN_ADDRESS || "1nc1nerator11111111111111111111111111111111";
 const BUYBACK_SLIPPAGE_BPS = Number(process.env.BUYBACK_SLIPPAGE_BPS || 20000);
@@ -120,14 +114,6 @@ if (!roundsState) {
   roundsState = { current: newRound(), history: [] };
   saveRounds(roundsState);
 }
-if (DEMO_MODE) {
-  const now = Date.now();
-  const nextSpinMs = new Date(roundsState.current.nextSpinAt).getTime();
-  if (!Number.isFinite(nextSpinMs) || nextSpinMs - now > ROUND_INTERVAL_MS) {
-    roundsState.current.nextSpinAt = new Date(now + ROUND_INTERVAL_MS).toISOString();
-    saveRounds(roundsState);
-  }
-}
 const BURNS_PATH = path.join(BASE_DIR, "burns.json");
 let burnFeed = [];
 try {
@@ -138,22 +124,20 @@ try {
   burnFeed = [];
 }
 
-if (!DEMO_MODE) {
-  burnFeed = burnFeed.filter(
-    (entry) => !entry?.dryRun && !String(entry?.signature ?? "").startsWith("demo-")
-  );
-  if (roundsState?.current?.entries) {
-    roundsState.current.entries = roundsState.current.entries.filter((e) => !e?.demo);
-  }
-  if (Array.isArray(roundsState?.history)) {
-    roundsState.history = roundsState.history.filter((round) => {
-      if (Array.isArray(round?.entries) && round.entries.some((e) => e?.demo)) return false;
-      return true;
-    });
-  }
-  saveRounds(roundsState);
-  fs.writeFileSync(BURNS_PATH, JSON.stringify(burnFeed.slice(0, 50), null, 2));
+burnFeed = burnFeed.filter(
+  (entry) => !entry?.dryRun && !String(entry?.signature ?? "").startsWith("demo-")
+);
+if (roundsState?.current?.entries) {
+  roundsState.current.entries = roundsState.current.entries.filter((e) => !e?.demo);
 }
+if (Array.isArray(roundsState?.history)) {
+  roundsState.history = roundsState.history.filter((round) => {
+    if (Array.isArray(round?.entries) && round.entries.some((e) => e?.demo)) return false;
+    return true;
+  });
+}
+saveRounds(roundsState);
+fs.writeFileSync(BURNS_PATH, JSON.stringify(burnFeed.slice(0, 50), null, 2));
 
 function persistBurns() {
   fs.writeFileSync(BURNS_PATH, JSON.stringify(burnFeed.slice(0, 50), null, 2));
@@ -200,23 +184,14 @@ function weightedWinner(entries) {
 }
 
 let spinning = false;
-let demoTimer = null;
-let demoBurnTimer = null;
-
 async function spinIfReady() {
   if (spinning) return;
   const current = roundsState.current;
   const now = Date.now();
-  const nextSpinMs = new Date(current.nextSpinAt).getTime();
-  if (DEMO_MODE && Number.isFinite(nextSpinMs) && nextSpinMs - now > ROUND_INTERVAL_MS) {
-    roundsState.current.nextSpinAt = new Date(now + ROUND_INTERVAL_MS).toISOString();
-    saveRounds(roundsState);
-  }
   if (new Date(roundsState.current.nextSpinAt).getTime() > now) return;
 
   const summary = summarizeRound(current);
-  const minPlayers = DEMO_MODE ? DEMO_MIN_PLAYERS : MIN_PLAYERS;
-  if (summary.uniquePlayers < minPlayers) {
+  if (summary.uniquePlayers < MIN_PLAYERS) {
     const nextSpin = new Date(now + ROUND_INTERVAL_MS).toISOString();
     roundsState.current.nextSpinAt = nextSpin;
     saveRounds(roundsState);
@@ -290,54 +265,16 @@ async function spinIfReady() {
 
 setInterval(spinIfReady, 10_000);
 
-function addDemoEntry() {
-  if (roundsState.current.status !== "open") return;
-  const entries = roundsState.current.entries;
-  if (entries.length > 200) return;
-  const uniquePlayers = new Set(entries.map((e) => e.player));
-  const shouldAddNew = uniquePlayers.size < DEMO_MIN_PLAYERS || Math.random() < 0.6;
-  const player = shouldAddNew
-    ? Keypair.generate().publicKey.toBase58()
-    : entries[Math.floor(Math.random() * entries.length)]?.player;
-  if (!player) return;
-  const amountSol = DEMO_ENTRY_MIN + Math.random() * (DEMO_ENTRY_MAX - DEMO_ENTRY_MIN);
-  const amountLamports = Math.max(1, Math.round(amountSol * LAMPORTS_PER_SOL));
-  roundsState.current.entries.push({
-    signature: `demo-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    player,
-    amountLamports,
-    timestamp: nowIso(),
-    demo: true,
-  });
-  saveRounds(roundsState);
-}
-
-if (DEMO_MODE) {
-  demoTimer = setInterval(addDemoEntry, DEMO_ENTRY_INTERVAL_MS);
-  demoBurnTimer = setInterval(() => {
-    const amount = 0.1 + Math.random() * 4.9;
-    recordBurn({
-      signature: `demo-burn-${Date.now()}`,
-      timestamp: nowIso(),
-      mint: BURN_MINT || "TBD",
-      burnAmountUi: amount.toFixed(4),
-      dryRun: true,
-    });
-  }, DEMO_BURN_INTERVAL_MS);
-  console.log(
-    `DEMO_MODE enabled: entries ${DEMO_ENTRY_MIN}-${DEMO_ENTRY_MAX} SOL every ${DEMO_ENTRY_INTERVAL_MS}ms`
-  );
-}
 
 async function executeBuyback(buybackLamports) {
   const amountLamports = MAX_BUYBACK_LAMPORTS
     ? Math.min(buybackLamports, MAX_BUYBACK_LAMPORTS)
     : buybackLamports;
 
-  if (DEMO_MODE || process.env.DRY_RUN === "1") {
+  if (process.env.DRY_RUN === "1") {
     const outTokens = (amountLamports / LAMPORTS_PER_SOL) * 100;
     recordBurn({
-      signature: `demo-buyback-${Date.now()}`,
+      signature: `dryrun-buyback-${Date.now()}`,
       timestamp: nowIso(),
       mint: BURN_MINT || "TBD",
       burnAmountUi: outTokens.toFixed(4),
