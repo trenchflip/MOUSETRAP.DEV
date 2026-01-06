@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "metrics:dev": "node server/index.js",
-    "payout:run": "node server/payout-worker.js"
+    "payout:run": "node server/payout-worker.js",
+    "buyback:run": "node server/buyback-worker.js"
   },
   "dependencies": {
     "@solana/wallet-adapter-react": "^0.15.39",
