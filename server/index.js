@@ -10,7 +10,10 @@ app.use(cors());
 
 const BASE_DIR = path.dirname(fileURLToPath(import.meta.url));
 const METRICS_PATH = process.env.METRICS_PATH || path.join(BASE_DIR, "metrics.json");
+const PAYOUTS_PATH = process.env.PAYOUTS_PATH || path.join(BASE_DIR, "payouts.json");
 const RPC_URL = process.env.RPC_URL || "";
+const HOUSE_PUBKEY = process.env.HOUSE_PUBKEY || "";
+const HOUSE_KEYPAIR_PATH = process.env.HOUSE_KEYPAIR_PATH || "";
 const TREASURY_PUBKEY = process.env.TREASURY_PUBKEY || "";
 const TREASURY_KEYPAIR_PATH = process.env.TREASURY_KEYPAIR_PATH || "";
 const METRICS_CACHE_MS = Number(process.env.METRICS_CACHE_MS || 5000);
@@ -25,6 +28,8 @@ function loadKeypair(filePath) {
 }
 
 function resolveTreasuryPubkey() {
+  if (HOUSE_PUBKEY) return new PublicKey(HOUSE_PUBKEY);
+  if (HOUSE_KEYPAIR_PATH) return loadKeypair(HOUSE_KEYPAIR_PATH).publicKey;
   if (TREASURY_PUBKEY) return new PublicKey(TREASURY_PUBKEY);
   if (TREASURY_KEYPAIR_PATH) return loadKeypair(TREASURY_KEYPAIR_PATH).publicKey;
   return null;
@@ -69,6 +74,13 @@ app.get("/health", (req, res) => res.json({ ok: true }));
 
 app.get("/metrics", async (req, res) => {
   return res.json(await loadMetrics());
+});
+
+app.get("/payouts", (req, res) => {
+  const limit = Math.max(Number(req.query.limit) || 6, 1);
+  const payouts = loadJson(PAYOUTS_PATH, []);
+  const list = Array.isArray(payouts) ? payouts.slice(0, limit) : [];
+  return res.json({ payouts: list });
 });
 
 const PORT = Number(process.env.METRICS_PORT || 8788);

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 const BASE_SIZE = 9;
@@ -157,7 +157,6 @@ export default function App() {
   const [step, setStep] = useState(0);
   const [nextPayout, setNextPayout] = useState(60);
   const [cheeseFeed, setCheeseFeed] = useState<CheeseEvent[]>([]);
-  const prevPayout = useRef(nextPayout);
 
   useEffect(() => {
     const tick = setInterval(() => {
@@ -192,21 +191,29 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (prevPayout.current !== 60 && nextPayout === 60) {
-      const payout = treasury * 0.1;
-      const wallet = lastWinner || `${Math.random().toString(36).slice(2, 6)}...${Math.random()
-        .toString(36)
-        .slice(2, 6)}`;
-      const event: CheeseEvent = {
-        id: `${Date.now()}-${wallet}`,
-        wallet,
-        payout,
-        time: new Date().toLocaleTimeString(),
-      };
-      setCheeseFeed((prev) => [event, ...prev].slice(0, 6));
-    }
-    prevPayout.current = nextPayout;
-  }, [nextPayout, treasury, lastWinner]);
+    const load = async () => {
+      try {
+        const resp = await fetch(`${METRICS_URL.replace(/\\/metrics$/, "")}/payouts?limit=6`, {
+          cache: "no-store",
+        });
+        if (!resp.ok) return;
+        const data = (await resp.json()) as { payouts?: Array<any> };
+        if (!Array.isArray(data.payouts)) return;
+        const mapped = data.payouts.map((entry) => ({
+          id: entry.id || `${entry.timestamp}-${entry.winner}`,
+          wallet: entry.winner ? `${entry.winner.slice(0, 6)}...${entry.winner.slice(-4)}` : "—",
+          payout: Number(entry.payoutSol) || 0,
+          time: entry.timestamp ? new Date(entry.timestamp).toLocaleTimeString() : "—",
+        }));
+        setCheeseFeed(mapped);
+      } catch {
+        // ignore
+      }
+    };
+    load();
+    const id = setInterval(load, 10000);
+    return () => clearInterval(id);
+  }, []);
 
   const mazeSize = useMemo(() => {
     const growth = Math.floor(holders / GROW_EVERY);

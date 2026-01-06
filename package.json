@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "metrics:dev": "node server/index.js"
+    "metrics:dev": "node server/index.js",
+    "payout:run": "node server/payout-worker.js"
   },
   "dependencies": {
     "@solana/wallet-adapter-react": "^0.15.39",
