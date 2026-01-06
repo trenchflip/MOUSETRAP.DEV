@@ -27,6 +27,14 @@ type CheeseEvent = {
   time: string;
 };
 
+type BurnEvent = {
+  id: string;
+  amount: number;
+  signature: string;
+  time: string;
+  dryRun: boolean;
+};
+
 function formatSol(value: number) {
   return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
@@ -157,6 +165,7 @@ export default function App() {
   const [step, setStep] = useState(0);
   const [nextPayout, setNextPayout] = useState(60);
   const [cheeseFeed, setCheeseFeed] = useState<CheeseEvent[]>([]);
+  const [burnFeed, setBurnFeed] = useState<BurnEvent[]>([]);
 
   useEffect(() => {
     const tick = setInterval(() => {
@@ -193,7 +202,7 @@ export default function App() {
   useEffect(() => {
     const load = async () => {
       try {
-        const resp = await fetch(`${METRICS_URL.replace(/\\/metrics$/, "")}/payouts?limit=6`, {
+        const resp = await fetch(`${METRICS_URL.replace(/\/metrics$/, "")}/payouts?limit=6`, {
           cache: "no-store",
         });
         if (!resp.ok) return;
@@ -206,6 +215,32 @@ export default function App() {
           time: entry.timestamp ? new Date(entry.timestamp).toLocaleTimeString() : "—",
         }));
         setCheeseFeed(mapped);
+      } catch {
+        // ignore
+      }
+    };
+    load();
+    const id = setInterval(load, 10000);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const resp = await fetch(`${METRICS_URL.replace(/\/metrics$/, "")}/buybacks?limit=6`, {
+          cache: "no-store",
+        });
+        if (!resp.ok) return;
+        const data = (await resp.json()) as { buybacks?: Array<any> };
+        if (!Array.isArray(data.buybacks)) return;
+        const mapped = data.buybacks.map((entry) => ({
+          id: entry.id || `${entry.timestamp}-${entry.signature}`,
+          amount: Number(entry.buySol) || 0,
+          signature: entry.signature || "—",
+          time: entry.timestamp ? new Date(entry.timestamp).toLocaleTimeString() : "—",
+          dryRun: Boolean(entry.dryRun),
+        }));
+        setBurnFeed(mapped);
       } catch {
         // ignore
       }
@@ -309,6 +344,25 @@ export default function App() {
                   <span>{event.wallet}</span>
                   <strong>{formatSol(event.payout)} SOL</strong>
                   <em>{event.time}</em>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      <section className="burn-feed-wrap">
+        <div className="card burn-card">
+          <h3>Burn Feed</h3>
+          {burnFeed.length === 0 ? (
+            <p>No burns yet.</p>
+          ) : (
+            <ul className="burn-list">
+              {burnFeed.map((burn) => (
+                <li key={burn.id}>
+                  <span>{burn.signature.slice(0, 6)}...{burn.signature.slice(-4)}</span>
+                  <strong>{formatSol(burn.amount)} SOL</strong>
+                  <em>{burn.time}{burn.dryRun ? " (dry run)" : ""}</em>
                 </li>
               ))}
             </ul>
